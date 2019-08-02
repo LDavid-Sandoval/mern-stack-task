@@ -8,6 +8,7 @@ class App extends Component {
             _id: '',
             title: '',
             description: '',
+            button: 'Add',
             tasks: []
         };
         this._handleChange =this._handleChange.bind(this);
@@ -34,7 +35,7 @@ class App extends Component {
                 .then(res => res.json())
                 .then(data => {
                     M.toast({html: data.status });
-                    this.setState({_id:'', title: '', description: ''});
+                    this.setState({_id:'', title: '', description: '', button: 'Add'});
                     this.fetchTask();
                 })
                 .catch(err => console.log(err) );
@@ -65,8 +66,9 @@ class App extends Component {
                 this.setState({
                     _id: data._id,
                     title: data.title,
-                    description: data.description
-                })
+                    description: data.description,
+                    button: 'Update'
+                });
         });
     }
 
@@ -126,7 +128,7 @@ class App extends Component {
                                                 </textarea>
                                             </div>
                                         </div>
-                                        <button type="submit" className="btn blue darken-2">Enviar</button>
+                                        <button type="submit" className="btn blue darken-2">{this.state.button}</button>
                                     </form>
                                 </div>
                             </div>
